@@ -24,7 +24,7 @@ while True:
     else:
         break
 
-with open('database.txt', 'a+') as database:
+with open('database.csv', 'a+') as database:
     database.seek(0)
     data = database.read(100)
     if len(data) > 0:
