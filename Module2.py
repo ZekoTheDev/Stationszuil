@@ -6,7 +6,7 @@ connection_string = "host='localhost' dbname='StationZuil' user='postgres' passw
 conn = psycopg2.connect(connection_string)
 cursor = conn.cursor()
 
-with open('database.txt', 'r+') as database:
+with open('database.csv', 'r+') as database:
     moderatorNaam = input('Wat is uw naam: ')
     moderatorEmail = input('Wat is uw email adress: ')
     DatabaseEntries = database.readlines()
@@ -29,15 +29,17 @@ with open('database.txt', 'r+') as database:
             datumVanBeoordeling = f"{vastgelegdeTijd.year}-{vastgelegdeTijd.month}-{vastgelegdeTijd.day}"
             tijdVanBeoordeling = f"{vastgelegdeTijd.hour}:{vastgelegdeTijd.minute}"
 
-
             beoordeling = 'Goedgekeurd'
             print(f"\nReview: {bericht} is Goedgekeurd door {moderatorNaam} \n")
-            query = """INSERT INTO berichten (bericht, berichtdatum, berichttijd, naam, 
+            berichtenQuery = """INSERT INTO berichten (bericht, berichtdatum, berichttijd, naam, 
             beoordeling, beoordelingdatum, beoordelingtijd, stationid)
             
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s);"""
-            cursor.execute(query, (bericht,berichtdatum,berichttijd,naam,beoordeling,
-                                   datumVanBeoordeling, tijdVanBeoordeling, stationid))
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s);
+            INSERT INTO moderator (email, naam)
+            VALUES (%s,%s);"""
+            cursor.execute(berichtenQuery, (bericht, berichtdatum, berichttijd, naam, beoordeling,
+                                            datumVanBeoordeling, tijdVanBeoordeling, stationid, moderatorNaam,
+                                            moderatorEmail))
             conn.commit()
 
         else:
