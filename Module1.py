@@ -16,7 +16,8 @@ while True:
     vastgelegdeTijd = datetime.datetime.now()
 
     bericht = input('Vul uw bericht in (max 140 karakters): ')
-    tijdVanBericht = f"{vastgelegdeTijd.year}-{vastgelegdeTijd.month}-{vastgelegdeTijd.day} {vastgelegdeTijd.hour}:{vastgelegdeTijd.minute}"
+    datumVanBericht = f"{vastgelegdeTijd.year}-{vastgelegdeTijd.month}-{vastgelegdeTijd.day}"
+    tijdVanBericht = f"{vastgelegdeTijd.hour}:{vastgelegdeTijd.minute}"
 
     if len(bericht) > 140:
         print('Uw bericht bevat meer dan 140 Karakters')
@@ -24,12 +25,12 @@ while True:
     else:
         break
 
-with open('database.csv', 'a+') as database:
+with open('database.txt', 'a+') as database:
     database.seek(0)
     data = database.read(100)
     if len(data) > 0:
         database.write('\n')
-    database.write(f'{bericht};{tijdVanBericht};{naamGebruiker};{station}')
+    database.write(f'{bericht};{datumVanBericht};{tijdVanBericht};{naamGebruiker};{station}')
     database.close()
 
 
