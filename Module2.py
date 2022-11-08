@@ -9,6 +9,7 @@ cursor = conn.cursor()
 with open('database.csv', 'r+') as database:
     moderatorNaam = input('Wat is uw naam: ')
     moderatorEmail = input('Wat is uw email adress: ')
+    moderatorid = 1
     DatabaseEntries = database.readlines()
     stationid = 0
     for review in DatabaseEntries:
