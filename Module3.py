@@ -48,25 +48,31 @@ connection_string = "host='localhost' dbname='derdedb' user='postgres' password=
 conn = psycopg2.connect(connection_string)
 cursor = conn.cursor()
 
-queryHaarlem = """SELECT bericht
-           FROM berichten
-           WHERE station_city = 'Haarlem';"""
+queryHaarlem = """SELECT bericht 
+                  FROM berichten
+                  WHERE station_city = 'Haarlem'
+                  ORDER BY berichtdatum ASC LIMIT 5;
+;"""
 
 cursor.execute(queryHaarlem)
 haarlemRes = cursor.fetchall()
 
 
-queryTilburg = """SELECT bericht
-           FROM berichten
-           WHERE station_city = 'Tilburg';"""
+queryTilburg = """SELECT bericht 
+                  FROM berichten
+                  WHERE station_city = 'Tilburg'
+                  ORDER BY berichtdatum ASC LIMIT 5;
+;"""
 
 cursor.execute(queryTilburg)
 tilburgRes = cursor.fetchall()
 
 
-queryGroningen = """SELECT bericht
-           FROM berichten
-           WHERE station_city = 'Groningen';"""
+queryGroningen =  """SELECT bericht
+                  FROM berichten
+                  WHERE station_city = 'Groningen'
+                  ORDER BY berichtdatum ASC LIMIT 5;
+;"""
 
 cursor.execute(queryGroningen)
 groningenRes = cursor.fetchall()
