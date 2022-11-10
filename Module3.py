@@ -14,11 +14,11 @@ appid = "203806fcf1ddff2d3a9937e6b90ca80c"
 
 urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
 urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
-urlRotterdam = f'http://api.openweathermap.org/data/2.5/weather?q=Rotterdam,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
+urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
 
 rGr = requests.get(urlGroningen)
 rTi = requests.get(urlTilburg)
-rRo = requests.get(urlRotterdam)
+rRo = requests.get(urlHaarlem)
 
 resGr = rGr.json()
 resTi = rTi.json()
@@ -44,20 +44,34 @@ celsiusRo = kelvinToCelsius(tempKevRo)
 
 
 # Vul Database Credentials in
-connection_string = "host='localhost' dbname='StationZuil' user='postgres' password='36802002'"
+connection_string = "host='localhost' dbname='derdedb' user='postgres' password='36802002'"
 conn = psycopg2.connect(connection_string)
 cursor = conn.cursor()
 
-query = """SELECT bericht
+queryHaarlem = """SELECT bericht
            FROM berichten
-           WHERE naam = 'Jack';"""
+           WHERE station_city = 'Haarlem';"""
 
-cursor.execute(query)
-records = cursor.fetchall()
+cursor.execute(queryHaarlem)
+haarlemRes = cursor.fetchall()
+
+
+queryTilburg = """SELECT bericht
+           FROM berichten
+           WHERE station_city = 'Tilburg';"""
+
+cursor.execute(queryTilburg)
+tilburgRes = cursor.fetchall()
+
+
+queryGroningen = """SELECT bericht
+           FROM berichten
+           WHERE station_city = 'Groningen';"""
+
+cursor.execute(queryGroningen)
+groningenRes = cursor.fetchall()
 conn.close()
 
-for record in records:
-    print(record[0][0])
 
 # Roep de Tkinter module aan
 master = Tk()
@@ -74,10 +88,10 @@ labeltwee.pack()
 master.title('NS Stationszuil')
 
 
-# Functie zorgt ervoor dat er een nieuw venster word geopend zodra gebruiker op 'Rotterdam' klikt
-def rotterdam():
+# Functie zorgt ervoor dat er een nieuw venster word geopend zodra gebruiker op 'Haarlem' klikt
+def haarlem():
     newWindow = Toplevel(master)
-    newWindow.title("Station Rotterdam")
+    newWindow.title("Station Haarlem")
     newWindow.geometry("720x580")
     # x = 0
     # y = 0
@@ -86,9 +100,9 @@ def rotterdam():
     #     label.grid(row=x, column=y)
     #     x += 1
     Label(newWindow,
-          text="Welkom op Station Rotterdam!").pack()
+          text="Welkom op Station Haarlem!").pack()
     Label(newWindow,
-          text=f"{records}!",background='white').pack()
+          text=f"{haarlemRes}!",background='white').pack()
     Label(newWindow,
           text=f"{celsiusRo}").pack()
 
@@ -101,6 +115,8 @@ def tilburg():
     Label(newWindow,
           text="Welkom op Station Tilburg!").pack()
     Label(newWindow,
+          text=f"{tilburgRes}!",background='white').pack()
+    Label(newWindow,
           text=f"{celsiusTi}").pack()
 
 
@@ -112,6 +128,8 @@ def groningen():
     newWindow.geometry("720x580")
     Label(newWindow,
           text="Welkom op Station Groningen!").pack()
+    Label(newWindow,
+          text=f"{groningenRes}!",background='white').pack()
     Label(newWindow,
           text=f"{celsiusGr}").pack()
 
@@ -126,8 +144,8 @@ label.pack(pady=10)
 # bevat ook wat 'Padding' om de uiterlijk wat mooier te maken
 
 btn = Button(master,
-             text="Rotterdam",
-             command=rotterdam)
+             text="Haarlem",
+             command=haarlem)
 btn.pack(pady=10)
 
 btn = Button(master,
