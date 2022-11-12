@@ -29,21 +29,9 @@ basisGr = resGr['main']
 basisTi = resTi['main']
 basisHa = resHa['main']
 
-
-
 tempKevGr = basisGr['temp']
 tempKevTi = basisTi['temp']
 tempKevHa = basisHa['temp']
-
-
-# def kelvinToCelsius(kelvin):
-#     return f'Het is momenteel {ceil(kelvin - 273.15)} Graden'
-
-
-# celsiusGr = kelvinToCelsius(tempKevGr)
-# celsiusTi = kelvinToCelsius(tempKevTi)
-# celsiusHa = kelvinToCelsius(tempKevHa)
-
 
 # Vul Database Credentials in
 connection_string = "host='localhost' dbname='derdedb' user='postgres' password='36802002'"
@@ -88,9 +76,6 @@ master.geometry("235x270")
 
 labeltwee = Label(master=master, text='Welkom bij NS!')
 labeltwee.pack()
-
-
-
 
 # Laat linksboven zien dat de venster een 'NS Stationzuil' Applicatie is
 master.title('NS Stationszuil')
@@ -141,8 +126,6 @@ def groningen():
     Label(newWindow,
           text=f"Het is momenteel {tempKevGr} Graden op station Groningen").pack()
 
-
-
 # Maak een label aan om te laten zien aan de gebruikers te zien dat de knoppen er zijn om een station te kiezen
 label = Label(master,
               text="Kies een station")
@@ -168,9 +151,3 @@ btn.pack(pady=10)
 
 # De mainloop zorgt ervoor dat de Event Loop word gestart zodat de Programma constant actief blijft
 mainloop()
-
-
-
-
-
-
