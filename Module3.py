@@ -12,9 +12,9 @@ from math import *
 
 appid = "203806fcf1ddff2d3a9937e6b90ca80c"
 
-urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
-urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
-urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem&unit=metric,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
+urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
+urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
+urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
 
 rGr = requests.get(urlGroningen)
 rTi = requests.get(urlTilburg)
@@ -26,21 +26,23 @@ resHa = rHa.json()
 
 
 basisGr = resGr['main']
-basisTi = resGr['main']
-basisHa = resGr['main']
+basisTi = resTi['main']
+basisHa = resHa['main']
+
+
 
 tempKevGr = basisGr['temp']
 tempKevTi = basisTi['temp']
 tempKevHa = basisHa['temp']
 
 
-def kelvinToCelsius(kelvin):
-    return f'Het is momenteel {ceil(kelvin - 273.15)} Graden'
+# def kelvinToCelsius(kelvin):
+#     return f'Het is momenteel {ceil(kelvin - 273.15)} Graden'
 
 
-celsiusGr = kelvinToCelsius(tempKevGr)
-celsiusTi = kelvinToCelsius(tempKevTi)
-celsiusHa = kelvinToCelsius(tempKevHa)
+# celsiusGr = kelvinToCelsius(tempKevGr)
+# celsiusTi = kelvinToCelsius(tempKevTi)
+# celsiusHa = kelvinToCelsius(tempKevHa)
 
 
 # Vul Database Credentials in
@@ -110,7 +112,7 @@ def haarlem():
     Label(newWindow,
           text=f"{haarlemRes}!",background='white').pack()
     Label(newWindow,
-          text=f"{celsiusHa}").pack()
+          text=f"Het is momenteel {tempKevHa} Graden op station Haarlem").pack()
 
 
 # Functie zorgt ervoor dat er een nieuw venster word geopend zodra gebruiker op 'Tilburg' klikt
@@ -123,7 +125,7 @@ def tilburg():
     Label(newWindow,
           text=f"{tilburgRes}!",background='white').pack()
     Label(newWindow,
-          text=f"{celsiusTi}").pack()
+          text=f"Het is momenteel {tempKevTi} Graden op station Tilburg").pack()
 
 
 
@@ -137,7 +139,7 @@ def groningen():
     Label(newWindow,
           text=f"{groningenRes}!",background='white').pack()
     Label(newWindow,
-          text=f"{celsiusGr}").pack()
+          text=f"Het is momenteel {tempKevGr} Graden op station Groningen").pack()
 
 
 
