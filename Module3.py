@@ -14,24 +14,24 @@ appid = "203806fcf1ddff2d3a9937e6b90ca80c"
 
 urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
 urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
-urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
+urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem&unit=metric,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c'
 
 rGr = requests.get(urlGroningen)
 rTi = requests.get(urlTilburg)
-rRo = requests.get(urlHaarlem)
+rHa = requests.get(urlHaarlem)
 
 resGr = rGr.json()
 resTi = rTi.json()
-resRo = rRo.json()
+resHa = rHa.json()
 
 
 basisGr = resGr['main']
 basisTi = resGr['main']
-basisRo = resGr['main']
+basisHa = resGr['main']
 
 tempKevGr = basisGr['temp']
 tempKevTi = basisTi['temp']
-tempKevRo = basisRo['temp']
+tempKevHa = basisHa['temp']
 
 
 def kelvinToCelsius(kelvin):
@@ -40,7 +40,7 @@ def kelvinToCelsius(kelvin):
 
 celsiusGr = kelvinToCelsius(tempKevGr)
 celsiusTi = kelvinToCelsius(tempKevTi)
-celsiusRo = kelvinToCelsius(tempKevRo)
+celsiusHa = kelvinToCelsius(tempKevHa)
 
 
 # Vul Database Credentials in
@@ -110,7 +110,7 @@ def haarlem():
     Label(newWindow,
           text=f"{haarlemRes}!",background='white').pack()
     Label(newWindow,
-          text=f"{celsiusRo}").pack()
+          text=f"{celsiusHa}").pack()
 
 
 # Functie zorgt ervoor dat er een nieuw venster word geopend zodra gebruiker op 'Tilburg' klikt
