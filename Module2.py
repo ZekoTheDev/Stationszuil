@@ -6,7 +6,7 @@ import psycopg2
 vastgelegdeTijd = datetime.datetime.now()
 
 # Vul Database Credentials in
-connection_string = "host='localhost' dbname='derdedb' user='postgres' password='36802002'"
+connection_string = "host='localhost' dbname='stationszuil' user='postgres' password='36802002'"
 conn = psycopg2.connect(connection_string)
 cursor = conn.cursor()
 
