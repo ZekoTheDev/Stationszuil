@@ -11,6 +11,9 @@ scheldwoorden = ['klootzak','idoot', 'sukkel']
 # en word de data geschreven naar een csv-bestand. Het bericht mag niet meer dan 140 karakters bedragen.
 
 def reviewSchrijven():
+    print('------------------------------------------------------')
+    print('Welkom bij NS!')
+    print('------------------------------------------------------')
     naamGebruiker = input('Voer uw naam in (Druk op "Enter" om anoniem door te gaan): ')
 
     if len(naamGebruiker) < 2:
@@ -22,6 +25,7 @@ def reviewSchrijven():
     while True:
         vastgelegdeTijd = datetime.datetime.now()
 
+       
         bericht = input('Vul uw bericht in (max 140 karakters): ')
         # Zoekt of er scheldwoorden aanwezig zijn in het bericht
         for scheldwoord in scheldwoorden:
