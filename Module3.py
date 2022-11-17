@@ -10,11 +10,11 @@ from tkinter.ttk import *
 import requests
 from math import *
 
-appid = "203806fcf1ddff2d3a9937e6b90ca80c"
+appid = "[openWeatherAPIkey]"
 
-urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
-urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
-urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem,nl&APPID=203806fcf1ddff2d3a9937e6b90ca80c&units=metric'
+urlGroningen = f'http://api.openweathermap.org/data/2.5/weather?q=Groningen,nl&APPID=[openWeatherAPIkey]&units=metric'
+urlTilburg = f'http://api.openweathermap.org/data/2.5/weather?q=Tilburg,nl&APPID=[openWeatherAPIkey]&units=metric'
+urlHaarlem = f'http://api.openweathermap.org/data/2.5/weather?q=Haarlem,nl&APPID=[openWeatherAPIkey]&units=metric'
 
 rGr = requests.get(urlGroningen)
 rTi = requests.get(urlTilburg)
